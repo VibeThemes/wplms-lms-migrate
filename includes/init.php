@@ -31,14 +31,23 @@ class WPLMS_LMS_INIT{
             add_action('wp_ajax_revert_migrated_courses',array($this,'revert_migrated_courses'));
             add_action('wp_ajax_dismiss_message',array($this,'dismiss_message'));
 		//}
+
+            add_shortcode('iframe_loader',function( $atts, $content = null ) {
+                extract(shortcode_atts(array(
+                'height'   => '',
+                'width'=>'',
+                'src'=>''
+                ), $atts));
+
+                return do_shortcode('[iframe height="'.$height.'"]'.$src.'[/iframe]');
+            });
     }
 
     function migration_notice(){
 
-
-
     	$this->migration_status = get_option('wplms_lms_migration');
         $this->revert_status = get_option('wplms_lms_migration_reverted');
+
         if(!empty($this->migration_status && empty($this->revert_status))){
             ?>
             <div id="migration_lms_courses_revert" class="update-nag notice ">
@@ -88,7 +97,7 @@ class WPLMS_LMS_INIT{
         }        
         
         $check = 1;
-        if(!function_exists('woocommerce')){
+        if(!function_exists('WC') && empty($this->migration_status) ){
             $check = 0;
             ?>
             <div class="welcome-panel" id="welcome_lms_panel" style="padding-bottom:20px;width:96%">
@@ -197,7 +206,7 @@ class WPLMS_LMS_INIT{
 			$json[]=array('id'=>$course->id,'title'=>$course->post_title);
 		}
 		update_option('wplms_lms_migration',1);
-		
+		delete_option('wplms_lms_migration_reverted');
 		$this->migrate_posts();
 
 		print_r(json_encode($json));
@@ -209,6 +218,7 @@ class WPLMS_LMS_INIT{
             _e('Security check Failed. Contact Administrator.','wplms-lms');
             die();
         }
+        delete_option('wplms_lms_migration');
         update_option('wplms_lms_migration_reverted',1);
         $this->revert_migrated_posts();
         die();
@@ -228,7 +238,7 @@ class WPLMS_LMS_INIT{
 
     	$wpdb->query("UPDATE {$wpdb->posts} SET post_type = 'course' WHERE post_type = 'dt_courses'");
     	$wpdb->query("UPDATE {$wpdb->posts} SET post_type = 'unit' WHERE post_type = 'dt_lessons' OR post_type = 'sfwd-topic'");
-        $wpdb->query("UPDATE {$wpdb->posts} SET post_type = 'quiz' WHERE post_type = 'dt_quiz'");
+        $wpdb->query("UPDATE {$wpdb->posts} SET post_type = 'quiz' WHERE post_type = 'dt_quizes'");
         $wpdb->query("UPDATE {$wpdb->posts} SET post_type = 'question' WHERE post_type = 'dt_questions'");
         $wpdb->query("UPDATE {$wpdb->posts} SET post_type = 'wplms-assignment' WHERE post_type = 'dt_assignments'");
         $wpdb->query("UPDATE {$wpdb->posts} SET post_type = 'certificate' WHERE post_type = 'dt_certificates'");
@@ -239,7 +249,7 @@ class WPLMS_LMS_INIT{
         global $wpdb;
         $wpdb->query("UPDATE {$wpdb->posts} SET post_type = 'dt_courses' WHERE post_type = 'course'");
         $wpdb->query("UPDATE {$wpdb->posts} SET post_type = 'dt_lessons' WHERE post_type = 'unit'");
-        $wpdb->query("UPDATE {$wpdb->posts} SET post_type = 'dt_quiz' WHERE post_type = 'quiz'");
+        $wpdb->query("UPDATE {$wpdb->posts} SET post_type = 'dt_quizes' WHERE post_type = 'quiz'");
         $wpdb->query("UPDATE {$wpdb->posts} SET post_type = 'dt_questions' WHERE post_type = 'question'");
         $wpdb->query("UPDATE {$wpdb->posts} SET post_type = 'dt_assignments' WHERE post_type = 'wplms-assignment'");
          $wpdb->query("UPDATE {$wpdb->posts} SET post_type = 'dt_certificates' WHERE post_type = 'certificate'");
@@ -333,7 +343,7 @@ class WPLMS_LMS_INIT{
     }
     
     function migrate_unit_settings($unit_id){
-        
+       
     }
 
     function migrate_quiz_settings($quiz_id){
