@@ -1,18 +1,18 @@
-=== WPLMS LEARNDASH MIGRATION ===
-Contributors: hklatiyan, vibethemes
-Tags: learndash, wplms, learndash migrate, wplms migrate, migrate
+=== WPLMS LMS MIGRATION ===
+Contributors: vibethemes
+Tags: LMS theme, wplms
 Requires at least: 3.6
-Tested up to: 4.7.3
+Tested up to: 5.0.3
 Stable tag: 1.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-WPLMS Learndash Migrate helps users to migrate all Learndash courses to WPLMS courses
+WPLMS LMS Migrat. Migrate Courses, units, quizzes, questions from LMS theme to WPLMS.
 
 == Description ==
-WPLMS Learndash Migrate plugin is a free plugin developed to help users to migrate all of their Learndash courses to WPLMS courses. The users do not have to worry a lot and perform various steps to migrate their courses. All this is done by a simple click. With the courses all of the quizzes and the units will be migrated successfully with just one click.
+Migrate all courses from LMS Theme by designthemes into WPLMS LMS platform for WordPress.
 
-Tutorial On how to setup and get started : <a href="https://vibethemes.com/documentation/wplms/knowledge-base/migrate-from-learndash-to-wplms/">link</a>
+Tutorial On how to setup and get started : 
 
 = More Information =
 
@@ -35,13 +35,13 @@ Visit the <a href="https://vibethemes.com/">VibeThemes</a> for documentation, su
 
 == Frequently Asked Questions ==
 
-= Does it require Learndash plugin? =
+= Does it require LMS Theme? =
 
-Yes, The plugin needs the Learndash plugin to be activated to work.
+Yes, the LMS theme from design themes needs to be active.
 
 = What are the required plugins to ensure the migration goes smoothly? =
 
-You require LeardDash, Vibe Custom Types and WPLMS Assignments plugins to be installed and activated to make sure the migration goes on smoothly.
+You require LMS theme, Vibe Custom Types plugins to be installed and activated to make sure the migration goes on smoothly.
 
 = Do I need the WPLMS theme to begin? =
 
@@ -49,11 +49,11 @@ Yes, You need the WPLMS theme to be active in the website to begin the migration
 
 = Can I revert changes if I don't like it after migrating? =
 
-Yes, after migration you can check all the courses and if you feel its not correct and again wants to move to Learndash, then you can simply click on the revert changes button to revert all the changes.
+Yes, after migration you can check all the courses and if you feel its not correct and again wants to move to LMS theme, then you can simply click on the revert changes button to revert all the changes.
 
 = Where can I report a bug? =
 
-Report bugs, suggest ideas, and participate in development at <a href="https://vibethemes.com/">VibeThemes</a>.
+Report bugs, suggest ideas, and participate in development at <a href="https://wplms.io/">WPLMS</a>.
 
 
 == Screenshots ==
